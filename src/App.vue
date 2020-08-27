@@ -1,28 +1,43 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="card mt-3" style="">
+            <!-- Color preview Element -->
+            <div class="card-body">
+              <h3 class="card-title">Color Cooper</h3>
+              <ColorRgbBar @change-color="colors = $event" />
+              {{colors}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ColorRgbBar from './components/rgb/ColorRgbBar';
 
 export default {
-  name: 'App',
+  name: "App",
+
   components: {
-    HelloWorld
-  }
-}
+    ColorRgbBar
+  },
+
+  data () {
+    return {
+      colors: {
+        hex: "", 
+        rgb: ""
+      }
+    };
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
+@import "~bootstrap/scss/bootstrap";
 </style>
