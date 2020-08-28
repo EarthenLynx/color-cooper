@@ -1,23 +1,40 @@
 <template>
-  <div>
-    <div id="color-preview" />
-    <div class="input-group mb-3">
-      <input disabled type="text" class="form-control" />
-      <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="button">Button</button>
-      </div>
+  <div class="container">
+    <label for="color-hex-control">Adjust hex - color</label>
+    <div id="color-hex-control" class="input-group mb-3">
+      <input
+        @keyup="handleSetColor"
+        v-model="value"
+        type="text"
+        class="form-control"
+      />
     </div>
   </div>
 </template>
 
 <script>
-export default {};
-</script>
+import { hexToRgb } from "../../utils/colorFuns.js";
 
-<style>
-#color-preview {
-    height: auto; 
-    width: 100%;
-    min-height: 150px;
-}
-</style>
+export default {
+  name: "HexBar",
+
+  props: {
+    colors: Object,
+  },
+
+  data() {
+    return {
+      value: "#f2f2f2",
+    };
+  },
+
+  methods: {
+    handleSetColor() {
+      const hex = this.value;
+      const rgb = hexToRgb(hex);
+
+      this.$emit("change-color", { hex: hex, rgb: rgb });
+    },
+  },
+};
+</script>

@@ -1,6 +1,8 @@
 <template>
   <div class="container-fluid">
-    <div class="row">
+    
+    <label for="color-hex-control">Adjust rgb - color</label>
+    <div id="color-rgb-control" class="row">
       <div class="col-md-12">
         <Colorslider name="Red" :color="rgb[0]" index="0" @change-rgb="handleSetColor(0, $event)" />
       </div>
@@ -19,7 +21,7 @@ import Colorslider from "./Colorslider";
 import { rgbStrToArr, rgbArrToStr, rgbToHex } from "../../utils/colorFuns.js";
 
 export default {
-  name: "Colorbar",
+  name: "Rgbbar",
 
   components: {
     Colorslider,
