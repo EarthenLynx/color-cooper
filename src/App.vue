@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Sidebar :activeColor="colors.hex" :collection="collection" />
     <div class="container">
       <h1 class="text-center mb-3 mt-3">Color Cooper</h1>
       <p class="text-center">
@@ -16,8 +17,14 @@
               <div class="container-fluid">
                 <div class="row">
                   <!-- Each of the components must pass an $event object that fits the structure of this parent -->
-                  <ColorRgbBar :colors="colors" @change-color="colors = $event" />
-                  <ColorHexBar :colors="colors" @change-color="colors = $event" />
+                  <ColorRgbBar
+                    :colors="colors"
+                    @change-color="colors = $event"
+                  />
+                  <ColorHexBar
+                    :colors="colors"
+                    @change-color="colors = $event"
+                  />
                 </div>
               </div>
             </div>
@@ -31,6 +38,7 @@
 </template>
 
 <script>
+import Sidebar from "./components/layout/Sidebar";
 import Toolbar from "./components/layout/Toolbar";
 import ColorRgbBar from "./components/rgb/ColorRgbBar";
 import ColorHexBar from "./components/hex/ColorHexBar";
@@ -40,6 +48,7 @@ export default {
   name: "App",
 
   components: {
+    Sidebar,
     ColorRgbBar,
     Toolbar,
     Footer,
@@ -48,18 +57,18 @@ export default {
 
   data() {
     return {
-      // The colors object is passed into each component to calculate 
+      // The colors object is passed into each component to calculate
       // each color anew. From there, it is then updated in App.vue
-      colors: {hex: "#7b7b71",rgb: "rgb(123, 123, 113)",},
-      collection: []
+      colors: { hex: "#7b7b71", rgb: "rgb(123, 123, 113)" },
+      collection: [],
     };
   },
 
   methods: {
     handleAddColorToCollection() {
       this.collection.push(this.colors);
-    }
-  }
+    },
+  },
 };
 </script>
 
