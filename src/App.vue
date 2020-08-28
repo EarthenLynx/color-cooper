@@ -98,26 +98,24 @@ export default {
     handleAddColorToCollection() {
       this.collection.push(this.colors);
       this.handleAddMessage({
-        id: this.messages.length,
         type: "success", 
         value: "Color added to collection"
-      }, 2000)
+      })
     },
 
     handleDeleteColorFromCollection(index) {
       this.collection.splice(index, 1);
       this.handleAddMessage({
-        id: this.messages.length,
         type: "success", 
         value: "Color deleted from collection"
-      }, 2000)
+      })
     },
 
-    handleAddMessage(message, duration) {
-      this.messages.push(message); 
+    handleAddMessage(message) {
+      this.messages.push({id: this.messages.length, ...message}); 
       setTimeout(() => {
         this.messages.shift();
-      }, duration) 
+      }, 2000) 
     }
   },
 };
