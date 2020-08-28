@@ -2,50 +2,45 @@
   <div class="container" id="sidebar">
     <label class="mt-3" for="collection">Collection</label>
 
-    <div class="card mt-3 mb-3" v-for="(color, index) in collection" :key="color">
+    <div
+      class="card mt-3 mb-3"
+      v-for="(color, index) in collection"
+      :key="color"
+    >
       <div class="card-header" :style="{ 'background-color': color.hex }"></div>
       <div class="card-body">
         <div class="input-group mt-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">
-              <i :style="{ color: color.hex }" class="fas fa-copy mx-1"></i>
-              Hex</span
-            >
-          </div>
-          <input
-            disabled
-            placeholder="Hex color"
-            type="text"
-            class="form-control"
-            v-model="color.hex"
-          />
+          <Clipper prepend="Hex" :color="color.hex" />
         </div>
 
         <div class="input-group mt-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">
-              <i :style="{ color: color.hex }" class="fas fa-copy mx-1"></i>
-              Rgb</span
-            >
-          </div>
-          <input
-            disabled
-            placeholder="Rgb color"
-            type="text"
-            class="form-control"
-            v-model="color.rgb"
-          />
+          <Clipper prepend="Rgb" :color="color.rgb" />
         </div>
-        <button @click="$emit('change-color', color)" class="btn btn-outline-primary mt-3">Set as active color</button>
-        <button @click="$emit('delete-color', index)" class="btn btn-outline-danger mt-3 float-right"><i class="fas fa-trash-alt"></i></button>
-
+        <button
+          @click="$emit('change-color', color)"
+          class="btn btn-outline-primary mt-3"
+        >
+          Set as active color
+        </button>
+        <button
+          @click="$emit('delete-color', index)"
+          class="btn btn-outline-danger mt-3 float-right"
+        >
+          <i class="fas fa-trash-alt"></i>
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Clipper from "../fragments/Clipper";
+
 export default {
+  components: {
+    Clipper,
+  },
+
   props: {
     activeColor: String,
     collection: Array,
