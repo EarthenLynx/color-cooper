@@ -50,7 +50,7 @@ export default {
     return {
       // The colors object is passed into each component to calculate 
       // each color anew. From there, it is then updated in App.vue
-      colors: {hex: "",rgb: "",},
+      colors: {hex: "#7b7b71",rgb: "rgb(123, 123, 113)",},
     };
   },
 };
