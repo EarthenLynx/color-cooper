@@ -18,7 +18,7 @@
 
     <!-- cooper Modal -->
     <transition name="cooper-show">
-      <Cooper @toggle-cooper="cooperActive = false" v-if="cooperActive" />
+      <Cooper @add-color="handleAddColorToCollection($event)" @toggle-cooper="cooperActive = false" v-if="cooperActive" />
     </transition>
     <!-- / cooper Modal -->
 
@@ -39,7 +39,7 @@
                   :sidebarActive="sidebarActive"
                   @toggle-sidebar="sidebarActive = !sidebarActive"
                   @toggle-cooper="cooperActive = !cooperActive"
-                  @add-color="handleAddColorToCollection"
+                  @add-color="handleAddColorToCollection(colors)"
                   @randomize="colors = $event"
                 />
                 <!-- / Toolbar -->
@@ -106,8 +106,8 @@ export default {
   },
 
   methods: {
-    handleAddColorToCollection() {
-      this.collection.push(this.colors);
+    handleAddColorToCollection(color) {
+      this.collection.push(color);
       this.handleAddMessage({
         type: "success",
         value: "Color added to collection",

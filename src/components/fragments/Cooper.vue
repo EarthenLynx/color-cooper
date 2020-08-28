@@ -46,6 +46,14 @@
             <!-- / Cooper content -->
           </div>
           <div class="modal-footer">
+            <button @click="extractRgb" type="button" class="btn btn-primary">
+              <i class="fas fa-palette"></i> Get colors
+            </button>
+
+            <button @click="emitColors" type="button" class="btn btn-primary">
+              <i class="fas fa-palette"></i> Add all to collection
+            </button>
+
             <button
               @click="$emit('toggle-cooper')"
               type="button"
@@ -61,12 +69,26 @@
 </template>
 
 <script>
+import ColorThief from "colorthief";
 import preview from "@/assets/sample.png";
+import { rgbArrToStr, rgbToHex } from "@/utils/colorFuns";
 
 export default {
   data() {
     return {
+      // Initial preview image
       preview,
+
+      // props for colorthief
+      index: 1,
+      numExtractedColors: 5,
+      extractedRgb: [
+        [61, 52, 150],
+        [223, 72, 167],
+        [43, 167, 199],
+        [154, 57, 147],
+        [149, 40, 72],
+      ],
     };
   },
 
@@ -80,6 +102,29 @@ export default {
         preview.src = reader.result;
       };
       reader.readAsDataURL(file);
+    },
+
+    extractRgb() {
+      this.extractedRgb = [];
+      const colorThief = new ColorThief();
+      const img = document.querySelector("img");
+      const extractedColors = colorThief.getPalette(
+        img,
+        this.numExtractedColors
+      );
+      this.extractedRgb = extractedColors;
+    },
+
+    emitColors() {
+      const vm = this;
+      const extracted = this.extractedRgb;
+
+      extracted.forEach((rgbArray) => {
+        const rgb = rgbArrToStr(rgbArray);
+        const hex = rgbToHex(rgbArray[0], rgbArray[1], rgbArray[2]);
+
+        vm.$emit("add-color", { rgb: rgb, hex: hex });
+      });
     },
   },
 };
