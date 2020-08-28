@@ -2,7 +2,7 @@
   <div class="container" id="sidebar">
     <label class="mt-3" for="collection">Collection</label>
 
-    <div class="card mt-3 mb-3" v-for="color in collection" :key="color">
+    <div class="card mt-3 mb-3" v-for="(color, index) in collection" :key="color">
       <div class="card-header" :style="{ 'background-color': color.hex }"></div>
       <div class="card-body">
         <div class="input-group mt-3">
@@ -36,6 +36,9 @@
             v-model="color.rgb"
           />
         </div>
+        <button class="btn btn-outline-primary mt-3">Set as active color</button>
+        <button @click="$emit('delete-color', index)" class="btn btn-outline-danger mt-3 float-right"><i class="fas fa-trash-alt"></i></button>
+
       </div>
     </div>
   </div>
