@@ -57,11 +57,11 @@
         }"
       >
         <div class="popper">
-          Get a random color
+          Randomize a color
         </div>
 
         <button @click="randomize" slot="reference" type="button" class="btn btn-outline-primary">
-          <i class="fas fa-random"></i>
+          <i class="fas fa-dice-five"></i>
         </button>
       </popper>
       <!-- / Button 2 right -->

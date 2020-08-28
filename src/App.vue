@@ -17,10 +17,20 @@
     <!-- / Toastbar -->
 
     <!-- cooper Modal -->
-    <transition name="cooper-show">
-      <Cooper @add-color="handleAddColorToCollection($event)" @toggle-cooper="cooperActive = false" v-if="cooperActive" />
+    <transition name="modal-show">
+      <Cooper
+        @add-color="handleAddColorToCollection($event)"
+        @toggle-cooper="cooperActive = false"
+        v-if="cooperActive"
+      />
     </transition>
     <!-- / cooper Modal -->
+
+    <!-- About Modal -->
+    <transition name="modal-show">
+      <About v-if="aboutActive" @toggle-about="aboutActive = !aboutActive" />
+    </transition>
+    <!-- / About Modal -->
 
     <!-- Main Application -->
     <div class="container">
@@ -63,6 +73,7 @@
             <Footer :colors="colors" />
             <!-- / Footer and color preview -->
           </div>
+          <small @click="aboutActive = !aboutActive" id="about" class="float-right mt-3">About this app</small>
         </div>
         <div class="col"></div>
       </div>
@@ -79,6 +90,7 @@ import Toolbar from "./components/layout/Toolbar";
 import ColorRgbBar from "./components/rgb/ColorRgbBar";
 import ColorHexBar from "./components/hex/ColorHexBar";
 import Footer from "./components/layout/Footer";
+import About from "@/components/fragments/About";
 
 export default {
   name: "App",
@@ -91,6 +103,7 @@ export default {
     Toolbar,
     Footer,
     ColorHexBar,
+    About,
   },
 
   data() {
@@ -101,7 +114,8 @@ export default {
       collection: [],
       messages: [],
       cooperActive: false,
-      sidebarActive: true,
+      aboutActive: true,
+      sidebarActive: false,
     };
   },
 
@@ -148,6 +162,10 @@ span.input-group-text {
   font-weight: 600;
 }
 
+#about {
+  cursor: pointer;
+}
+
 /**
  * Styles for the animations 
  * 1. Sidebar animation
@@ -170,15 +188,15 @@ span.input-group-text {
   opacity: 0;
 }
 
-.cooper-show-enter {
+.modal-show-enter {
   opacity: 0;
 }
 
-.cooper-show-enter-active {
+.modal-show-enter-active {
   transition: all 0.5s;
 }
 
-.cooper-show-leave-active {
+.modal-show-leave-active {
   transition: all 0.5s;
   opacity: 0;
 }
