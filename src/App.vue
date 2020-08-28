@@ -4,6 +4,7 @@
     <transition name="sidebar-slide">
       <Sidebar
         v-if="sidebarActive"
+        @change-color="colors = $event"
         @delete-color="handleDeleteColorFromCollection($event)"
         :activeColor="colors.hex"
         :collection="collection"

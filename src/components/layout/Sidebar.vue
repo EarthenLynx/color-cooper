@@ -36,7 +36,7 @@
             v-model="color.rgb"
           />
         </div>
-        <button class="btn btn-outline-primary mt-3">Set as active color</button>
+        <button @click="$emit('change-color', color)" class="btn btn-outline-primary mt-3">Set as active color</button>
         <button @click="$emit('delete-color', index)" class="btn btn-outline-danger mt-3 float-right"><i class="fas fa-trash-alt"></i></button>
 
       </div>
