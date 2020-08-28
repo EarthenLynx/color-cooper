@@ -4,7 +4,7 @@
     <div id="color-hex-control" class="input-group mb-3">
       <input
         @keyup="handleSetColor"
-        v-model="value"
+        v-model="colors.hex"
         type="text"
         class="form-control"
       />
@@ -22,15 +22,9 @@ export default {
     colors: Object,
   },
 
-  data() {
-    return {
-      value: "#f2f2f2",
-    };
-  },
-
   methods: {
     handleSetColor() {
-      const hex = this.value;
+      const hex = this.colors.hex;
       const rgb = hexToRgb(hex);
 
       this.$emit("change-color", { hex: hex, rgb: rgb });

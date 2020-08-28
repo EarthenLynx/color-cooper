@@ -6,15 +6,15 @@
     ></div>
 
     <input
-      v-model="value"
-      @change="$emit('change-rgb', parseInt(value))"
+      v-model="color"
+      @change="$emit('change-rgb', parseInt(color))"
       type="range"
       min="0"
       max="255"
       class="form-control-range"
     />
 
-    <input disabled type="text" class="form-control" v-model="value" />
+    <input disabled type="text" class="form-control" v-model="color" />
   </div>
 </template>
 
@@ -24,23 +24,18 @@ export default {
 
   props: {
     name: String,
-    index: Number,
-  },
-
-  data() {
-    return {
-      value: 123,
-    };
+    index: String,
+    color: Number
   },
 
   computed: {
     // Set Slider Background depending on the index that's been passed
     backgroundColor() {
       return this.index === "0"
-        ? `rgb(${this.value}, 0, 0)`
+        ? `rgb(${this.color}, 0, 0)`
         : this.index === "1"
-        ? `rgb(0, ${this.value}, 0)`
-        : `rgb(0, 0, ${this.value})`;
+        ? `rgb(0, ${this.color}, 0)`
+        : `rgb(0, 0, ${this.color})`;
     },
   },
 };
