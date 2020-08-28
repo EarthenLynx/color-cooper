@@ -1,6 +1,8 @@
 <template>
   <div id="app">
+    <!-- Toggleable components -->
     <Sidebar :activeColor="colors.hex" :collection="collection" />
+
     <div class="container">
       <h1 class="text-center mb-3 mt-3">Color Cooper</h1>
       <p class="text-center">
@@ -82,5 +84,9 @@ body {
 label {
   font-weight: 600;
   font-size: 1.1rem;
+}
+
+span.input-group-text { 
+  font-weight: 600;
 }
 </style>
