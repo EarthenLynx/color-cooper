@@ -29,20 +29,43 @@
             <Clipper prepend="Rgb" :color="color.rgb" />
           </div>
           <button
-            @click="$emit('change-color', color)"
-            class="btn btn-outline-primary mt-3"
+            @click="$emit('delete-color', index)"
+            class="btn btn-outline-danger mt-3"
           >
-            Set as active color
+            Delete
           </button>
           <button
-            @click="$emit('delete-color', index)"
-            class="btn btn-outline-danger mt-3 float-right"
+            @click="$emit('change-color', color)"
+            class="btn btn-outline-primary mt-3 float-right"
           >
-            <i class="fas fa-trash-alt"></i>
+            Set as active color
           </button>
         </div>
       </div>
     </transition-group>
+    <div v-if="collection.length > 3" class="sidebar-toolbar">
+      <div class="containe">
+        <div class="row">
+          <div class="col-6">
+            <button
+              @click="$emit('wipe-collection')"
+              class="btn btn-outline-danger mt-3 toolbar-button"
+            >
+              <i class="fas fa-broom"></i>
+              Wipe clean
+            </button>
+          </div>
+          <div class="col-6">
+            <button
+              @click="$emit('toggle-sidebar')"
+              class="btn btn-outline-info mt-3 toolbar-button mobile"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -62,6 +85,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+button.toolbar-button {
+  width: 100%;
+}
+
 #sidebar {
   z-index: 1;
   overflow-y: scroll;
@@ -83,15 +110,37 @@ export default {
   height: 2.5rem;
 }
 
+.sidebar-toolbar {
+  background-color: #fff;
+  position: sticky;
+  left: 0;
+  bottom: 0;
+  height: 4rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  width: 100%;
+}
+
+.mobile {
+  display: none;
+}
+
 @media (max-width: 992px) {
   #sidebar {
     width: 40vw;
+  }
+
+  .mobile {
+    display: block;
   }
 }
 
 @media (max-width: 576px) {
   #sidebar {
     width: 100vw;
+  }
+
+  .mobile {
+    display: block;
   }
 }
 

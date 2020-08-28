@@ -7,6 +7,7 @@
         @toggle-sidebar="sidebarActive = !sidebarActive"
         @change-color="colors = $event"
         @delete-color="handleDeleteColorFromCollection($event)"
+        @wipe-collection="handleWipeCollection"
         :activeColor="colors.hex"
         :collection="collection"
       />
@@ -128,7 +129,7 @@ export default {
   methods: {
     handleAddColorToCollection(color) {
       if (this.collection.length === 0) this.sidebarActive = true;
-      if (this.cooperActive) this.cooperActive = false; 
+      if (this.cooperActive) this.cooperActive = false;
       this.collection.push(color);
       this.handleAddMessage({
         type: "success",
@@ -147,6 +148,13 @@ export default {
           this.sidebarActive = false;
         }, 1250);
       }
+    },
+
+    handleWipeCollection() {
+      this.collection = [];
+      setTimeout(() => {
+        this.sidebarActive = false;
+      }, 1250);
     },
 
     handleAddMessage(message) {
