@@ -1,9 +1,9 @@
 <template>
   <div class="form-group card">
-      <div
-        class="color-indicator"
-        :style="{ 'background-color': backgroundColor }"
-      ></div>
+    <div
+      class="color-indicator"
+      :style="{ 'background-color': backgroundColor }"
+    ></div>
 
     <input
       v-model="value"
@@ -13,6 +13,8 @@
       max="255"
       class="form-control-range"
     />
+
+    <input disabled type="text" class="form-control" v-model="value" />
   </div>
 </template>
 
@@ -44,17 +46,23 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+input.form-control {
+  margin-left: 1rem;
+  width: 3.5rem;
+}
+
 .form-group {
-  display: flex !important; 
+  display: flex !important;
   flex-direction: row !important;
+  align-items: center;
+  justify-content: center;
   padding: 0.5rem;
-  border-radius: 1rem;
 }
 
 .color-indicator {
-  height: 1.5rem;
-  width: 2rem;
+  height: 2rem;
+  width: 3rem;
   margin-right: 1rem;
   border-radius: 0.2rem;
 }

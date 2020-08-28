@@ -16,7 +16,7 @@
 
 <script>
 import Colorslider from "./Colorslider";
-import { rgbArrToStr, rgbToHex } from "../../utils/colorFuns.js";
+import { rgbStrToArr, rgbArrToStr, rgbToHex } from "../../utils/colorFuns.js";
 
 export default {
   name: "Colorbar",
@@ -25,16 +25,22 @@ export default {
     Colorslider,
   },
 
-  data() {
-    return {
-      rgb: [123, 123, 123],
-    };
+  props: {
+    colors: Object
+  },
+
+  computed: {
+    rgb() {
+      // Convert the array from the parent's property into a bindable array of color values
+      return rgbStrToArr(this.colors.rgb);
+    }
   },
 
   methods: {
-    handleSetColor(index, newColor) {
+    // Set the parent's color depending on the event value received by each child
+    handleSetColor(index, event) {
       let rgb = this.rgb;
-      rgb[index] = newColor;
+      rgb[index] = event;
 
       // Calculate rgb color
       const rgbColor = rgbArrToStr(rgb);
@@ -42,6 +48,7 @@ export default {
       // Calculate hex color
       const hexColor = rgbToHex(rgb[0], rgb[1], rgb[2]);
 
+      // Emit the new color object to the parent
       this.$emit("change-color", { hex: hexColor, rgb: rgbColor });
     },
   },
