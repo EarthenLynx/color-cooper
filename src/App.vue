@@ -15,6 +15,11 @@
     <!-- Toastbar -->
     <Messagebar :messages="messages" />
     <!-- / Toastbar -->
+
+    <!-- cooper Modal -->
+    <Cooper @toggle-cooper="cooperActive = false" v-if="cooperActive" />
+    <!-- / cooper Modal -->
+
     <!-- Main Application -->
     <div class="container">
       <h1 class="text-center mb-3 mt-3">Color Cooper</h1>
@@ -31,6 +36,7 @@
                 <Toolbar
                   :sidebarActive="sidebarActive"
                   @toggle-sidebar="sidebarActive = !sidebarActive"
+                  @toggle-cooper="cooperActive = !cooperActive"
                   @add-color="handleAddColorToCollection"
                   @randomize="colors = $event"
                 />
@@ -66,6 +72,7 @@
 <script>
 import Sidebar from "./components/layout/Sidebar";
 import Messagebar from "./components/layout/Messagebar";
+import Cooper from "./components/fragments/Cooper";
 import Toolbar from "./components/layout/Toolbar";
 import ColorRgbBar from "./components/rgb/ColorRgbBar";
 import ColorHexBar from "./components/hex/ColorHexBar";
@@ -77,6 +84,7 @@ export default {
   components: {
     Sidebar,
     Messagebar,
+    Cooper,
     ColorRgbBar,
     Toolbar,
     Footer,
@@ -90,6 +98,7 @@ export default {
       colors: { hex: "#7b7b71", rgb: "rgb(123, 123, 113)" },
       collection: [],
       messages: [],
+      cooperActive: false,
       sidebarActive: true,
     };
   },
@@ -98,25 +107,25 @@ export default {
     handleAddColorToCollection() {
       this.collection.push(this.colors);
       this.handleAddMessage({
-        type: "success", 
-        value: "Color added to collection"
-      })
+        type: "success",
+        value: "Color added to collection",
+      });
     },
 
     handleDeleteColorFromCollection(index) {
       this.collection.splice(index, 1);
       this.handleAddMessage({
-        type: "success", 
-        value: "Color deleted from collection"
-      })
+        type: "success",
+        value: "Color deleted from collection",
+      });
     },
 
     handleAddMessage(message) {
-      this.messages.push({id: this.messages.length, ...message}); 
+      this.messages.push({ id: this.messages.length, ...message });
       setTimeout(() => {
         this.messages.shift();
-      }, 2000) 
-    }
+      }, 2000);
+    },
   },
 };
 </script>

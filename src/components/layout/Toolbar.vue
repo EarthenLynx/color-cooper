@@ -78,7 +78,7 @@
           Upload an image
         </div>
 
-        <button slot="reference" type="button" class="btn btn-primary">
+        <button @click="$emit('toggle-cooper')" slot="reference" type="button" class="btn btn-primary">
           <i class="fas fa-images"></i>
         </button>
       </popper>
