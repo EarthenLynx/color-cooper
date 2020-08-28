@@ -4,7 +4,8 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Upload a picture</h5>
+            <h5 class="modal-title">Get the dominant colors of your image</h5>
+
             <button
               @click="$emit('toggle-cooper')"
               type="button"
@@ -17,14 +18,15 @@
           <div class="modal-body">
             <!-- Cooper content -->
 
+            <!-- Img processing -->
             <div class="container">
-              <!-- Img processing -->
               <div class="row">
                 <div class="col"></div>
-                <div class="col-lg-10 col-md-12">
+                <div class="col-lg-8 col-md-12">
                   <img class="img-fluid" :src="preview" alt="Image preview" />
 
-                  <div class="input-group mb-3 mt-3">
+                  <label for="file-processing" class="mt-3">Step 1: </label>
+                  <div class="input-group mb-3">
                     <div class="custom-file">
                       <input
                         class="custom-file-input"
@@ -33,34 +35,96 @@
                         @change="changePreview()"
                       />
                       <label class="custom-file-label" for="inputGroupFile01"
-                        >Upload an image</label
+                        >Select a picture</label
                       >
                     </div>
                   </div>
                 </div>
                 <div class="col"></div>
               </div>
-              <!-- / Img processing -->
             </div>
+            <!-- / Img processing -->
+
+            <!-- Number of colors extracted -->
+            <div class="container">
+              <div class="row">
+                <div class="col"></div>
+                <div class="col-lg-8 col-sm-12">
+                  <label for="how-many-colors"
+                    >Step 2: How many?</label
+                  >
+                  <div class="form-group cooper-actions">
+                    <input
+                      id="how-many-colors"
+                      v-model="value"
+                      type="range"
+                      min="0"
+                      max="20"
+                      class="form-control-range"
+                    />
+
+                    <input
+                      disabled
+                      style="width: 3rem;"
+                      type="text"
+                      class="form-control ml-2"
+                      v-model="value"
+                    />
+                  </div>
+                </div>
+                <div class="col"></div>
+              </div>
+            </div>
+
+            <!-- / Numbers of colors extracted -->
+
+            <!-- Action buttons -->
+            <div class="container">
+              <div class="row">
+                <div class="col"></div>
+                <div class="col-lg-4 col-sm-12">
+                  <div class="input-group mt-2 mb-2">
+                    <label for="button-push-to-collection">Step 3:</label>
+                    <button
+                      @click="extractRgb"
+                      type="button"
+                      class="btn btn-primary"
+                    >
+                      <i class="fas fa-palette"></i> Get dominant colors
+                    </button>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-sm-12">
+                  <div class="input-group mt-2 mb-2">
+                    <label for="button-push-to-collection">Step 4:</label>
+                    <button
+                      id="button-push-to-collection"
+                      @click="emitColors"
+                      type="button"
+                      class="btn btn-primary"
+                    >
+                      <i class="fas fa-paper-plane"></i> Push to collection
+                    </button>
+                  </div>
+                </div>
+                <div class="col"></div>
+              </div>
+            </div>
+            <!-- / Action buttons -->
 
             <!-- / Cooper content -->
           </div>
           <div class="modal-footer">
-            <button @click="extractRgb" type="button" class="btn btn-primary">
-              <i class="fas fa-palette"></i> Get colors
-            </button>
-
-            <button @click="emitColors" type="button" class="btn btn-primary">
-              <i class="fas fa-palette"></i> Add all to collection
-            </button>
-
-            <button
-              @click="$emit('toggle-cooper')"
-              type="button"
-              class="btn btn-secondary"
-            >
-              Close
-            </button>
+            <!-- Color preview -->
+            <div class="container cooper-preview-wrapper">
+              <div v-for="color in cooperColors" :key="color">
+                <div
+                  :style="{ 'background-color': color }"
+                  class="cooper-preview"
+                ></div>
+              </div>
+            </div>
+            <!-- / Color preview  -->
           </div>
         </div>
       </div>
@@ -81,7 +145,7 @@ export default {
 
       // props for colorthief
       index: 1,
-      numExtractedColors: 5,
+      value: 10,
       extractedRgb: [
         [61, 52, 150],
         [223, 72, 167],
@@ -127,10 +191,28 @@ export default {
       });
     },
   },
+
+  computed: {
+    cooperColors() {
+      const cooperColors = this.extractedRgb.map((rgbArray) => {
+        return rgbArrToStr(rgbArray);
+      });
+
+      return cooperColors; // Array of rgbs
+    },
+
+    numExtractedColors() {
+      return parseInt(this.value);
+    },
+  },
 };
 </script>
 
 <style scoped>
+button.btn {
+  width: 100%;
+}
+
 .modal-wrapper {
   position: absolute;
   top: 0;
@@ -143,5 +225,18 @@ export default {
 .modal {
   display: block;
   position: absolute;
+}
+
+.cooper-preview-wrapper,
+.cooper-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cooper-preview {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 0.2rem;
 }
 </style>
