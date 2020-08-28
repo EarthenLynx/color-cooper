@@ -11,7 +11,7 @@
           <div class="card mt-3">
             <div class="card-body">
               <div class="container-fluid mb-3">
-                <Toolbar />
+                <Toolbar @add-color="handleAddColorToCollection" />
               </div>
               <div class="container-fluid">
                 <div class="row">
@@ -51,8 +51,15 @@ export default {
       // The colors object is passed into each component to calculate 
       // each color anew. From there, it is then updated in App.vue
       colors: {hex: "#7b7b71",rgb: "rgb(123, 123, 113)",},
+      collection: []
     };
   },
+
+  methods: {
+    handleAddColorToCollection() {
+      this.collection.push(this.colors);
+    }
+  }
 };
 </script>
 
