@@ -1,14 +1,14 @@
 <template>
-  <div class="contain">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-4 col-md-12">
-        <Colorslider name="Red" @change-rgb="handleSetColor(0, $event)" />
+      <div class="col-md-12">
+        <Colorslider name="Red" :color="rgb[0]" index="0" @change-rgb="handleSetColor(0, $event)" />
       </div>
-      <div class="col-lg-4 col-md-12">
-        <Colorslider name="Green" @change-rgb="handleSetColor(1, $event)" />
+      <div class="col-md-12">
+        <Colorslider name="Green" :color="rgb[1]" index="1" @change-rgb="handleSetColor(1, $event)" />
       </div>
-      <div class="col-lg-4 col-md-12">
-        <Colorslider name="Blue" @change-rgb="handleSetColor(2, $event)" />
+      <div class="col-md-12">
+        <Colorslider name="Blue" :color="rgb[2]" index="2" @change-rgb="handleSetColor(2, $event)" />
       </div>
     </div>
   </div>
@@ -19,6 +19,8 @@ import Colorslider from "./Colorslider";
 import { rgbArrToStr, rgbToHex } from "../../utils/colorFuns.js";
 
 export default {
+  name: "Colorbar",
+
   components: {
     Colorslider,
   },
