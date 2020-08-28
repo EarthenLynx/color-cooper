@@ -4,6 +4,7 @@
     <transition name="sidebar-slide">
       <Sidebar
         v-if="sidebarActive"
+        @toggle-sidebar="sidebarActive = !sidebarActive"
         @change-color="colors = $event"
         @delete-color="handleDeleteColorFromCollection($event)"
         :activeColor="colors.hex"
@@ -73,7 +74,12 @@
             <Footer :colors="colors" />
             <!-- / Footer and color preview -->
           </div>
-          <small @click="aboutActive = !aboutActive" id="about" class="float-right mt-3">About this app</small>
+          <small
+            @click="aboutActive = !aboutActive"
+            id="about"
+            class="float-right mt-3"
+            >About this app</small
+          >
         </div>
         <div class="col"></div>
       </div>
@@ -114,13 +120,15 @@ export default {
       collection: [],
       messages: [],
       cooperActive: false,
-      aboutActive: true,
+      aboutActive: false,
       sidebarActive: false,
     };
   },
 
   methods: {
     handleAddColorToCollection(color) {
+      if (this.collection.length === 0) this.sidebarActive = true;
+      if (this.cooperActive) this.cooperActive = false; 
       this.collection.push(color);
       this.handleAddMessage({
         type: "success",
@@ -134,6 +142,11 @@ export default {
         type: "success",
         value: "Color deleted from collection",
       });
+      if (this.collection.length === 0) {
+        setTimeout(() => {
+          this.sidebarActive = false;
+        }, 1250);
+      }
     },
 
     handleAddMessage(message) {
@@ -148,6 +161,7 @@ export default {
 
 <style lang="scss">
 @import "~bootstrap/scss/bootstrap";
+@import "./css/main.css";
 
 body {
   background-color: #fcfcfc;

@@ -3,12 +3,12 @@
     <div class="card-footer">
       <div class="container">
         <div class="row">
-          <div class="col-lg-6 col-md-12">
-            <Clipper prepend="Hex" :color="colors.hex"/>
+          <div class="col-lg-6 col-md-12 mt-2 mb-2">
+            <Clipper  prepend="Hex" :color="colors.hex"/>
           </div>
 
-          <div class="col-lg-6 col-md-12">
-            <Clipper prepend="Rgb" :color="colors.rgb"/>
+          <div class="col-lg-6 col-md-12 mt-2 mb-2">
+            <Clipper  prepend="Rgb" :color="colors.rgb"/>
           </div>
         </div>
       </div>

@@ -29,7 +29,7 @@
       <popper
         trigger="hover"
         :options="{
-          placement: 'left',
+          placement: 'top',
           modifiers: { offset: { offset: '0,10px' } },
         }"
       >
@@ -70,7 +70,7 @@
       <popper
         trigger="hover"
         :options="{
-          placement: 'right',
+          placement: 'top',
           modifiers: { offset: { offset: '0,10px' } },
         }"
       >
