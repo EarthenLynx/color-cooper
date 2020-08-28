@@ -17,7 +17,9 @@
     <!-- / Toastbar -->
 
     <!-- cooper Modal -->
-    <Cooper @toggle-cooper="cooperActive = false" v-if="cooperActive" />
+    <transition name="cooper-show">
+      <Cooper @toggle-cooper="cooperActive = false" v-if="cooperActive" />
+    </transition>
     <!-- / cooper Modal -->
 
     <!-- Main Application -->
@@ -149,7 +151,7 @@ span.input-group-text {
 /**
  * Styles for the animations 
  * 1. Sidebar animation
- *
+ * 2. Cooper animation
  *
  */
 
@@ -165,6 +167,19 @@ span.input-group-text {
 .sidebar-slide-leave-active {
   transform: translateX(-100px);
   transition: all 1s;
+  opacity: 0;
+}
+
+.cooper-show-enter {
+  opacity: 0;
+}
+
+.cooper-show-enter-active {
+  transition: all 0.5s;
+}
+
+.cooper-show-leave-active {
+  transition: all 0.5s;
   opacity: 0;
 }
 </style>
