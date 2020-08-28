@@ -51,7 +51,7 @@
                 <div class="col"></div>
                 <div class="col-lg-8 col-sm-12">
                   <label for="how-many-colors"
-                    >Step 2: How many?</label
+                    >Step 2: # of colors extracted</label
                   >
                   <div class="form-group cooper-actions">
                     <input
@@ -225,6 +225,8 @@ button.btn {
 .modal {
   display: block;
   position: absolute;
+  
+  overflow-y: auto;
 }
 
 .cooper-preview-wrapper,
