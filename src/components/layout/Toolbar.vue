@@ -13,7 +13,6 @@
         </div>
 
         <button
-          
           @click="$emit('toggle-sidebar')"
           slot="reference"
           type="button"
@@ -60,7 +59,12 @@
           Randomize a color
         </div>
 
-        <button @click="randomize" slot="reference" type="button" class="btn btn-outline-primary">
+        <button
+          @click="randomize"
+          slot="reference"
+          type="button"
+          class="btn btn-outline-primary"
+        >
           <i class="fas fa-dice-five"></i>
         </button>
       </popper>
@@ -78,7 +82,12 @@
           Upload an image
         </div>
 
-        <button @click="$emit('toggle-cooper')" slot="reference" type="button" class="btn btn-primary">
+        <button
+          @click="$emit('toggle-cooper')"
+          slot="reference"
+          type="button"
+          class="btn btn-primary"
+        >
           <i class="fas fa-images"></i>
         </button>
       </popper>
@@ -91,12 +100,14 @@
 import Popper from "vue-popperjs";
 import "vue-popperjs/dist/vue-popper.css";
 
-import {createRandomColor, hexToRgb} from '../../utils/colorFuns';
+import { createRandomColor, hexToRgb } from "../../utils/colorFuns";
 
 export default {
+  name: "Toobar",
+
   props: {
     colors: Object,
-    sidebarActive: Boolean
+    sidebarActive: Boolean,
   },
 
   components: {
@@ -104,14 +115,13 @@ export default {
   },
 
   methods: {
-    randomize () {
-      const hex = createRandomColor(); 
+    randomize() {
+      const hex = createRandomColor();
       const rgb = hexToRgb(hex);
 
-      this.$emit('randomize', {hex: hex, rgb: rgb});
-
-    }
-  }
+      this.$emit("randomize", { hex: hex, rgb: rgb });
+    },
+  },
 };
 </script>
 

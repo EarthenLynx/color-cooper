@@ -90,6 +90,7 @@
 </template>
 
 <script>
+// Import the necessary components
 import Sidebar from "./components/layout/Sidebar";
 import Messagebar from "./components/layout/Messagebar";
 import Cooper from "./components/fragments/Cooper";
@@ -113,6 +114,7 @@ export default {
     About,
   },
 
+  // On this instance, the application's state is being centrally handled.
   data() {
     return {
       // The colors object is passed into each component to calculate
@@ -127,6 +129,7 @@ export default {
   },
 
   methods: {
+    // Add to collection on user's click
     handleAddColorToCollection(color) {
       if (this.collection.length === 0) this.sidebarActive = true;
       if (this.cooperActive) this.cooperActive = false;
@@ -137,6 +140,7 @@ export default {
       });
     },
 
+    // Remove selected element from collection on user's click
     handleDeleteColorFromCollection(index) {
       this.collection.splice(index, 1);
       this.handleAddMessage({
@@ -150,13 +154,19 @@ export default {
       }
     },
 
+    // Remove all elements from the collection
     handleWipeCollection() {
       this.collection = [];
+      this.handleAddMessage({
+        type: "warning",
+        value: "Color collection has been wiped",
+      });
       setTimeout(() => {
         this.sidebarActive = false;
       }, 1250);
     },
 
+    // Add a notificaiton to the list
     handleAddMessage(message) {
       this.messages.push({ id: this.messages.length, ...message });
       setTimeout(() => {

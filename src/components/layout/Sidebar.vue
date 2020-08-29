@@ -1,5 +1,6 @@
 <template>
   <div class="container" id="sidebar">
+    <!-- Collection's header -->
     <label class="mt-3" for="collection">Collection</label>
     <button
       @click="$emit('toggle-sidebar')"
@@ -9,7 +10,9 @@
     >
       <span aria-hidden="true">&times;</span>
     </button>
+    <!-- / Collection's header -->
 
+    <!-- Scroll container for the collection's colors -->
     <transition-group name="collection-slide">
       <div
         class="card mt-3 mb-3"
@@ -43,6 +46,9 @@
         </div>
       </div>
     </transition-group>
+    <!-- / Scroll container for the collection's colors -->
+
+    <!-- Sidebar toolbar -->
     <div v-if="collection.length > 3" class="sidebar-toolbar">
       <div class="containe">
         <div class="row">
@@ -66,13 +72,16 @@
         </div>
       </div>
     </div>
+    <!-- / Sidebar toolbar -->
   </div>
 </template>
 
 <script>
-import Clipper from "../fragments/Clipper";
+import Clipper from "@/components/fragments/Clipper";
 
 export default {
+    name: "Sidebar",
+
   components: {
     Clipper,
   },

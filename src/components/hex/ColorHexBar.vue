@@ -3,7 +3,7 @@
     <label for="color-hex-control">Adjust hex - color</label>
     <div id="color-hex-control" class="input-group mb-3">
       <input
-        @keyup="handleSetColor"
+        @keyup="emitColors"
         v-model="colors.hex"
         type="text"
         class="form-control"
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { hexToRgb } from "../../utils/colorFuns.js";
+import { hexToRgb } from "@/utils/colorFuns.js";
 
 export default {
   name: "HexBar",
@@ -23,7 +23,9 @@ export default {
   },
 
   methods: {
-    handleSetColor() {
+    // Calculate the Rgb and Hex colors extracted from the img. 
+    // Then, emit them to the parent component
+    emitColors() {
       const hex = this.colors.hex;
       const rgb = hexToRgb(hex);
 

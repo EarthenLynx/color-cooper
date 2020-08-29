@@ -51,10 +51,14 @@
             <div class="container">
               <div class="row">
                 <div class="col-lg-6 col-sm-12 text-left">
-                  <a href="">About me</a>
+                  <a href="https://earthenlynx.github.io/portfolio/"
+                    >About me</a
+                  >
                 </div>
                 <div class="col-lg-6 col-sm-12 text-right">
-                  <a href="">Github repos</a>
+                  <a href="https://github.com/EarthenLynx/color-cooper"
+                    >Github repos</a
+                  >
                 </div>
               </div>
             </div>
@@ -67,6 +71,8 @@
 
 <script>
 export default {
+  name: "About",
+
   data() {
     return {
       modules: [

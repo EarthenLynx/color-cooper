@@ -1,24 +1,46 @@
-# color-cooper
+# 🎨 Color Cooper
 
-## Project setup
+> **Get colors from your favorite pictures**
+
+Color cooper allows you to easily extract the dominant colors from your own images. The app was built with privacy in mind - all of the magic happens in your browser, no background servers are involved. 
+
+It also offers some other, smaller features, such as
+
+- Explicitly define how many colors you want to extract
+- Changing the colors you've found afterwards
+- Copying to clipboard & randomization
+- Add colors to a temporary collection 
+- WIP: Make colors brighter and darker 
+- WIP: Save your collection in csv
+
+## Demo
+
+https://color-cooper.herokuapp.com/
+
+## Project setup ( Development )
+
+To run Color Cooper, you need to have [Node.js](https://nodejs.org/en/) installed on your mashine. 
+
 ```
-npm install
+$ git clone https://github.com/EarthenLynx/color-cooper
+$ npm i
+$ npm run serve
 ```
 
-### Compiles and hot-reloads for development
+## Deployment
+
+If you run it on your own environment, you need to have the [Vue CLI](https://cli.vuejs.org/) installed globally.
+
 ```
-npm run serve
+$ npm i -g @vue/cli
 ```
 
-### Compiles and minifies for production
+The built app is served by a static [Express](https://expressjs.com/) server by default.
+
 ```
-npm run build
+$ npm run build
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
+If you deploy to Heroku, postinstall takes care of handling the building process automatically.
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+If you deploy on your own setup, you can also just deploy the built dist folder into your htdocs / static folder

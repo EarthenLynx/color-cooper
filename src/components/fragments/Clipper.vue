@@ -33,6 +33,8 @@ import Popper from "vue-popperjs";
 import "vue-popperjs/dist/vue-popper.css";
 
 export default {
+  name: "Clipper",
+
   props: {
     prepend: String,
     color: String,
@@ -43,6 +45,7 @@ export default {
   },
 
   methods: {
+    // Copy to clipboard when user clicks on the element
     clip() {
       let copy = document.createElement("textarea");
       document.body.appendChild(copy);

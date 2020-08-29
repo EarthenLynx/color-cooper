@@ -2,18 +2,19 @@
   <div id="messagebar">
     <div class="container mt-3">
       <transition-group name="message-slide" tag="div">
-      <div
-        v-for="message in messages"
-        :key="message"
-        class="alert"
-        :class="{
-          'alert-danger': message.type === 'danger',
-          'alert-success': message.type === 'success',
-        }"
-        role="alert"
-      >
-        {{message.value}}
-      </div>
+        <div
+          v-for="message in messages"
+          :key="message"
+          class="alert"
+          :class="{
+            'alert-danger': message.type === 'danger',
+            'alert-success': message.type === 'success',
+            'alert-warning': message.type === 'warning',
+          }"
+          role="alert"
+        >
+          <i class="fas fa-bell"></i> {{ message.value }}
+        </div>
       </transition-group>
     </div>
   </div>
@@ -21,6 +22,8 @@
 
 <script>
 export default {
+  name: "Messagebar",
+
   props: {
     messages: Array,
   },

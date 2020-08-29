@@ -114,6 +114,7 @@
 
             <!-- / Cooper content -->
           </div>
+          
           <div class="modal-footer">
             <!-- Color preview -->
             <div class="container cooper-preview-wrapper">
@@ -138,6 +139,8 @@ import preview from "@/assets/sample.png";
 import { rgbArrToStr, rgbToHex } from "@/utils/colorFuns";
 
 export default {
+  name: "Cooper",
+  
   data() {
     return {
       // Initial preview image
@@ -157,6 +160,7 @@ export default {
   },
 
   methods: {
+    // When a new img is placed in the file input, update the preview accordingly
     changePreview() {
       const file = document.querySelector("input[type=file]").files[0];
       const reader = new FileReader();
@@ -168,6 +172,7 @@ export default {
       reader.readAsDataURL(file);
     },
 
+    // Use colorthief to extract the number of extracted colors from the img
     extractRgb() {
       this.extractedRgb = [];
       const colorThief = new ColorThief();
@@ -179,6 +184,8 @@ export default {
       this.extractedRgb = extractedColors;
     },
 
+    // Calculate the Rgb and Hex colors extracted from the img. 
+    // Then, emit them to the parent component
     emitColors() {
       const vm = this;
       const extracted = this.extractedRgb;
@@ -193,6 +200,7 @@ export default {
   },
 
   computed: {
+    // Calculate the preview colors 
     cooperColors() {
       const cooperColors = this.extractedRgb.map((rgbArray) => {
         return rgbArrToStr(rgbArray);
@@ -201,6 +209,7 @@ export default {
       return cooperColors; // Array of rgbs
     },
 
+    // Make sure the number of extracted colors is a number
     numExtractedColors() {
       return parseInt(this.value);
     },

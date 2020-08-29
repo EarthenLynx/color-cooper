@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: "colorslider",
+  name: "Colorslider",
 
   props: {
     name: String,

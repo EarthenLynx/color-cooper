@@ -4,11 +4,11 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-6 col-md-12 mt-2 mb-2">
-            <Clipper  prepend="Hex" :color="colors.hex"/>
+            <Clipper prepend="Hex" :color="colors.hex" />
           </div>
 
           <div class="col-lg-6 col-md-12 mt-2 mb-2">
-            <Clipper  prepend="Rgb" :color="colors.rgb"/>
+            <Clipper prepend="Rgb" :color="colors.rgb" />
           </div>
         </div>
       </div>
@@ -22,11 +22,13 @@
 </template>
 
 <script>
-import Clipper from '../fragments/Clipper'
+import Clipper from "@/components/fragments/Clipper";
 
 export default {
+  name: "Footer",
+  
   components: {
-    Clipper
+    Clipper,
   },
 
   props: {

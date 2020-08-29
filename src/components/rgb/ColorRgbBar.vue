@@ -1,24 +1,38 @@
 <template>
   <div class="container-fluid">
-    
     <label for="color-hex-control">Adjust rgb - color</label>
     <div id="color-rgb-control" class="row">
       <div class="col-md-12">
-        <Colorslider name="Red" :color="rgb[0]" index="0" @change-rgb="handleSetColor(0, $event)" />
+        <Colorslider
+          name="Red"
+          :color="rgb[0]"
+          index="0"
+          @change-rgb="emitColors(0, $event)"
+        />
       </div>
       <div class="col-md-12">
-        <Colorslider name="Green" :color="rgb[1]" index="1" @change-rgb="handleSetColor(1, $event)" />
+        <Colorslider
+          name="Green"
+          :color="rgb[1]"
+          index="1"
+          @change-rgb="emitColors(1, $event)"
+        />
       </div>
       <div class="col-md-12">
-        <Colorslider name="Blue" :color="rgb[2]" index="2" @change-rgb="handleSetColor(2, $event)" />
+        <Colorslider
+          name="Blue"
+          :color="rgb[2]"
+          index="2"
+          @change-rgb="emitColors(2, $event)"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Colorslider from "./Colorslider";
-import { rgbStrToArr, rgbArrToStr, rgbToHex } from "../../utils/colorFuns.js";
+import Colorslider from "@/components/rgb/Colorslider";
+import { rgbStrToArr, rgbArrToStr, rgbToHex } from "@/utils/colorFuns.js";
 
 export default {
   name: "Rgbbar",
@@ -28,19 +42,19 @@ export default {
   },
 
   props: {
-    colors: Object
+    colors: Object,
   },
 
   computed: {
+    // Convert the array from the parent's property into a bindable array of color values
     rgb() {
-      // Convert the array from the parent's property into a bindable array of color values
       return rgbStrToArr(this.colors.rgb);
-    }
+    },
   },
 
   methods: {
     // Set the parent's color depending on the event value received by each child
-    handleSetColor(index, event) {
+    emitColors(index, event) {
       let rgb = this.rgb;
       rgb[index] = event;
 
