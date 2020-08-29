@@ -66,6 +66,8 @@
                   <ColorHexBar
                     :colors="colors"
                     @change-color="colors = $event"
+                    @darken-color="handleDarkenColor"
+                    @brighten-color="handleBrightenColor"
                   />
                   <!-- / Color picker components -->
                 </div>
@@ -91,14 +93,16 @@
 
 <script>
 // Import the necessary components
-import Sidebar from "./components/layout/Sidebar";
-import Messagebar from "./components/layout/Messagebar";
-import Cooper from "./components/fragments/Cooper";
-import Toolbar from "./components/layout/Toolbar";
-import ColorRgbBar from "./components/rgb/ColorRgbBar";
-import ColorHexBar from "./components/hex/ColorHexBar";
-import Footer from "./components/layout/Footer";
+import Sidebar from "@/components/layout/Sidebar";
+import Messagebar from "@/components/layout/Messagebar";
+import Cooper from "@/components/fragments/Cooper";
+import Toolbar from "@/components/layout/Toolbar";
+import ColorRgbBar from "@/components/rgb/ColorRgbBar";
+import ColorHexBar from "@/components/hex/ColorHexBar";
+import Footer from "@/components/layout/Footer";
 import About from "@/components/fragments/About";
+
+import {rgbToHex, rgbStrToArr, rgbArrToStr, brightenRgbArr, darkenRgbArr} from "@/utils/colorFuns"
 
 export default {
   name: "App",
@@ -164,6 +168,27 @@ export default {
       setTimeout(() => {
         this.sidebarActive = false;
       }, 1250);
+    },
+
+    // Darken the selected colors by 5%
+    handleDarkenColor() {
+      const oldRgbArray = rgbStrToArr(this.colors.rgb)
+      const newRgbArray = darkenRgbArr(oldRgbArray, 5);
+
+      const rgb = rgbArrToStr(newRgbArray)
+      const hex = rgbToHex(newRgbArray[0], newRgbArray[1], newRgbArray[2])
+
+      this.colors = {hex: hex, rgb: rgb}
+    },
+    // Brighten the selected colors
+    handleBrightenColor() {
+      const oldRgbArray = rgbStrToArr(this.colors.rgb)
+      const newRgbArray = brightenRgbArr(oldRgbArray, 5);
+
+      const rgb = rgbArrToStr(newRgbArray)
+      const hex = rgbToHex(newRgbArray[0], newRgbArray[1], newRgbArray[2])
+
+      this.colors = {hex: hex, rgb: rgb}
     },
 
     // Add a notificaiton to the list
