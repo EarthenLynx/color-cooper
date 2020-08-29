@@ -1,10 +1,11 @@
 <template>
   <div id="toolbar">
     <div id="toolbar-left" class="float-left">
+      <!-- Toggle Sidebar -->
       <popper
         trigger="hover"
         :options="{
-          placement: 'right',
+          placement: 'top',
           modifiers: { offset: { offset: '0,10px' } },
         }"
       >
@@ -22,7 +23,32 @@
           <i v-if="sidebarActive" class="fas fa-times"></i>
         </button>
       </popper>
+      <!-- / Toggle sidebar -->
+
+      <!-- Save collection -->
+      <popper
+        trigger="hover"
+        :options="{
+          placement: 'top',
+          modifiers: { offset: { offset: '0,10px' } },
+        }"
+      >
+        <div class="popper">
+          Download collection
+        </div>
+
+        <button
+          @click="getCsv()"
+          slot="reference"
+          type="button"
+          class="btn btn-outline-primary"
+        >
+          <i class="fas fa-download"></i>
+        </button>
+      </popper>
+      <!-- / Save collection -->
     </div>
+
     <div id="toolbar-right" class="text-right">
       <!-- Button 1 right -->
       <popper
@@ -101,12 +127,13 @@ import Popper from "vue-popperjs";
 import "vue-popperjs/dist/vue-popper.css";
 
 import { createRandomColor, hexToRgb } from "../../utils/colorFuns";
+import { parse } from "json2csv";
 
 export default {
   name: "Toobar",
 
   props: {
-    colors: Object,
+    collection: Array,
     sidebarActive: Boolean,
   },
 
@@ -115,18 +142,28 @@ export default {
   },
 
   methods: {
+    // Create a random color and emit it to the parent
     randomize() {
       const hex = createRandomColor();
       const rgb = hexToRgb(hex);
 
       this.$emit("randomize", { hex: hex, rgb: rgb });
     },
+
+    // Create an element to download the collection as csv
+    getCsv() {
+      const fields = ["Hex", "Rgb"];
+      const csv = parse(this.collection, fields);
+      const blob = new Blob(["\ufeff", csv]);
+      const url = URL.createObjectURL(blob);
+      let downloadLink = document.createElement("a");
+      downloadLink.href = url;
+      downloadLink.download = "data.csv";
+
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    },
   },
 };
 </script>
-
-<style scoped lang="scss">
-button.btn.btn-primary {
-  color: #fff;
-}
-</style>

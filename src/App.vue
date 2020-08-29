@@ -48,6 +48,7 @@
               <div class="container-fluid mb-3">
                 <!-- Toolbar -->
                 <Toolbar
+                  :collection="collection"
                   :sidebarActive="sidebarActive"
                   @toggle-sidebar="sidebarActive = !sidebarActive"
                   @toggle-cooper="cooperActive = !cooperActive"
@@ -102,7 +103,13 @@ import ColorHexBar from "@/components/hex/ColorHexBar";
 import Footer from "@/components/layout/Footer";
 import About from "@/components/fragments/About";
 
-import {rgbToHex, rgbStrToArr, rgbArrToStr, brightenRgbArr, darkenRgbArr} from "@/utils/colorFuns"
+import {
+  rgbToHex,
+  rgbStrToArr,
+  rgbArrToStr,
+  brightenRgbArr,
+  darkenRgbArr,
+} from "@/utils/colorFuns";
 
 export default {
   name: "App",
@@ -172,23 +179,23 @@ export default {
 
     // Darken the selected colors by 5%
     handleDarkenColor() {
-      const oldRgbArray = rgbStrToArr(this.colors.rgb)
+      const oldRgbArray = rgbStrToArr(this.colors.rgb);
       const newRgbArray = darkenRgbArr(oldRgbArray, 5);
 
-      const rgb = rgbArrToStr(newRgbArray)
-      const hex = rgbToHex(newRgbArray[0], newRgbArray[1], newRgbArray[2])
+      const rgb = rgbArrToStr(newRgbArray);
+      const hex = rgbToHex(newRgbArray[0], newRgbArray[1], newRgbArray[2]);
 
-      this.colors = {hex: hex, rgb: rgb}
+      this.colors = { hex: hex, rgb: rgb };
     },
     // Brighten the selected colors
     handleBrightenColor() {
-      const oldRgbArray = rgbStrToArr(this.colors.rgb)
+      const oldRgbArray = rgbStrToArr(this.colors.rgb);
       const newRgbArray = brightenRgbArr(oldRgbArray, 5);
 
-      const rgb = rgbArrToStr(newRgbArray)
-      const hex = rgbToHex(newRgbArray[0], newRgbArray[1], newRgbArray[2])
+      const rgb = rgbArrToStr(newRgbArray);
+      const hex = rgbToHex(newRgbArray[0], newRgbArray[1], newRgbArray[2]);
 
-      this.colors = {hex: hex, rgb: rgb}
+      this.colors = { hex: hex, rgb: rgb };
     },
 
     // Add a notificaiton to the list

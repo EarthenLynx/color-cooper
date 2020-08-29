@@ -10,7 +10,7 @@ It also offers some other, smaller features, such as
 - Changing the colors you've found afterwards
 - Copying to clipboard & randomization
 - Add colors to a temporary collection 
-- WIP: Make colors brighter and darker 
+- Make colors brighter and darker 
 - WIP: Save your collection in csv
 
 ## Demo

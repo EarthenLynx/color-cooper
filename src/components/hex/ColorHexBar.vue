@@ -7,10 +7,13 @@
         <popper
           trigger="hover"
           :options="{
-            placement: 'top',
+            placement: 'left',
             modifiers: { offset: { offset: '0,10px' } },
           }"
         >
+        <div class="popper">
+            Darken selected color
+          </div>
           <button
             slot="reference"
             @click="$emit('darken-color')"
@@ -38,7 +41,7 @@
         <popper
           trigger="hover"
           :options="{
-            placement: 'top',
+            placement: 'right',
             modifiers: { offset: { offset: '0,10px' } },
           }"
         >
