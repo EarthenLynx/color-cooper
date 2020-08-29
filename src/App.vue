@@ -36,14 +36,17 @@
 
     <!-- Main Application -->
     <div class="container">
-      <h1 class="text-center mb-3 mt-3"><img src="@/assets/cooper_360.png" width="56px" height="56px" alt=""> Color Cooper</h1>
+      <h1 class="text-center mb-3 mt-3">
+        <img src="@/assets/cooper_360.png" width="56px" height="56px" alt="" />
+        Color Cooper
+      </h1>
       <p class="text-center">
-         A tool to pick colors from your favorite picture
+        A tool to pick colors from your favorite picture
       </p>
       <div class="row">
         <div class="col"></div>
         <div class="col-lg-6 col-md-12">
-          <div class="card mt-3">
+          <div class="card mt-3" style="border-radius: 12px;">
             <div class="card-body">
               <div class="container-fluid mb-3">
                 <!-- Toolbar -->
@@ -78,11 +81,11 @@
             <Footer :colors="colors" />
             <!-- / Footer and color preview -->
           </div>
-          <small
+          <div
             @click="aboutActive = !aboutActive"
             id="about"
-            class="float-right mt-3"
-            >About this app</small
+            class="mt-3 text-center"
+            ><small>🎨 About this app</small></div
           >
         </div>
         <div class="col"></div>
@@ -213,8 +216,16 @@ export default {
 @import "~bootstrap/scss/bootstrap";
 @import "./css/main.css";
 
+* {
+  font-family: "Roboto", sans-serif;
+}
+
 body {
   background-color: #fcfcfc;
+}
+
+h1 {
+  font-weight: 600;
 }
 
 label {

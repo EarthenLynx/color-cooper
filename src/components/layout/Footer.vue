@@ -13,11 +13,7 @@
         </div>
       </div>
     </div>
-    <div
-      class="card-footer"
-      style="height: 8rem;"
-      :style="{ 'background-color': colors.hex }"
-    />
+    <div class="card-footer color-preview" :style="{ 'background-color': colors.hex }" />
   </div>
 </template>
 
@@ -26,7 +22,7 @@ import Clipper from "@/components/fragments/Clipper";
 
 export default {
   name: "Footer",
-  
+
   components: {
     Clipper,
   },
@@ -37,4 +33,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.card-footer.color-preview {
+  height: 8rem;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+</style>
