@@ -99,7 +99,7 @@ button.toolbar-button {
 }
 
 #sidebar {
-  z-index: 1;
+  z-index: 3;
   overflow-y: scroll;
   border: 1px solid rgba(0, 0, 0, 0.125);
   width: 25vw;
