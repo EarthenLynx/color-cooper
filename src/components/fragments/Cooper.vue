@@ -114,17 +114,21 @@
 
             <!-- / Cooper content -->
           </div>
-          
+
           <div class="modal-footer">
             <!-- Color preview -->
-            <div class="container cooper-preview-wrapper">
+            <transition-group
+              name="preview-slide"
+              tag="div"
+              class="container cooper-preview-wrapper"
+            >
               <div v-for="color in cooperColors" :key="color">
                 <div
                   :style="{ 'background-color': color }"
                   class="cooper-preview"
                 ></div>
               </div>
-            </div>
+            </transition-group>
             <!-- / Color preview  -->
           </div>
         </div>
@@ -140,7 +144,7 @@ import { rgbArrToStr, rgbToHex } from "@/utils/colorFuns";
 
 export default {
   name: "Cooper",
-  
+
   data() {
     return {
       // Initial preview image
@@ -184,7 +188,7 @@ export default {
       this.extractedRgb = extractedColors;
     },
 
-    // Calculate the Rgb and Hex colors extracted from the img. 
+    // Calculate the Rgb and Hex colors extracted from the img.
     // Then, emit them to the parent component
     emitColors() {
       const vm = this;
@@ -200,7 +204,7 @@ export default {
   },
 
   computed: {
-    // Calculate the preview colors 
+    // Calculate the preview colors
     cooperColors() {
       const cooperColors = this.extractedRgb.map((rgbArray) => {
         return rgbArrToStr(rgbArray);
@@ -248,5 +252,26 @@ button.btn {
   height: 2rem;
   width: 2rem;
   border-radius: 0.2rem;
+}
+
+/* Animation styles for the preview colors */
+.preview-slide-enter {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+.preview-slide-enter-active {
+  transition: all 1.5s;
+}
+
+.preview-slide-leave-active {
+  position: absolute;
+  transform: translateY(20px);
+  transition: all 1.5s;
+  opacity: 0;
+}
+
+.preview-slide-move {
+  transition: all 1.5s;
 }
 </style>

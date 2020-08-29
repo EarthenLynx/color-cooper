@@ -34,7 +34,7 @@
         }"
       >
         <div class="popper">
-          Download collection
+          Save collection
         </div>
 
         <button
@@ -43,7 +43,7 @@
           type="button"
           class="btn btn-outline-primary"
         >
-          <i class="fas fa-download"></i>
+          <i class="fas fa-save"></i>
         </button>
       </popper>
       <!-- / Save collection -->

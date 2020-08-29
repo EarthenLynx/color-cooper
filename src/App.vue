@@ -36,9 +36,9 @@
 
     <!-- Main Application -->
     <div class="container">
-      <h1 class="text-center mb-3 mt-3">Color Cooper</h1>
+      <h1 class="text-center mb-3 mt-3"><img src="@/assets/cooper_360.png" width="56px" height="56px" alt=""> Color Cooper</h1>
       <p class="text-center">
-        🎨 A tool to pick colors from your favorite picture
+         A tool to pick colors from your favorite picture
       </p>
       <div class="row">
         <div class="col"></div>

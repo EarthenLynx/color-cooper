@@ -45,6 +45,13 @@
               the link below.
             </p>
 
+            <p>
+              The logo has been created by
+              <a href="https://cviddesign.wordpress.com/" target="_blank"
+                >Tsvetomira Dichevska</a
+              >
+            </p>
+
             <!-- / Modal content -->
           </div>
           <div class="modal-footer">
@@ -79,6 +86,11 @@ export default {
         {
           name: "Color Thief",
           link: "https://github.com/null2/color-thief",
+          icon: '<i class="fab fa-github"></i>',
+        },
+        {
+          name: "json2csv",
+          link: "https://github.com/zemirco/json2csv",
           icon: '<i class="fab fa-github"></i>',
         },
         {
