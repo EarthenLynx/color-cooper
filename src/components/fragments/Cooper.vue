@@ -225,7 +225,7 @@ button.btn {
 .modal-wrapper {
   position: absolute;
   top: 0;
-  z-index: 2;
+  z-index: 3;
   height: 100vh;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.2);
@@ -234,7 +234,6 @@ button.btn {
 .modal {
   display: block;
   position: absolute;
-  
   overflow-y: auto;
 }
 

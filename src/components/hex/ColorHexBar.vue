@@ -2,11 +2,28 @@
   <div class="container">
     <label for="color-hex-control">Adjust hex - color & brightness</label>
     <div id="color-hex-control" class="input-group mb-3">
+      <!-- Darken color - button -->
       <div class="input-group-prepend">
-        <button @click="$emit('darken-color')" class="btn btn-outline-primary" type="button">
-          <i class="fas fa-angle-double-left"></i>
-        </button>
+        <popper
+          trigger="hover"
+          :options="{
+            placement: 'top',
+            modifiers: { offset: { offset: '0,10px' } },
+          }"
+        >
+          <button
+            slot="reference"
+            @click="$emit('darken-color')"
+            class="btn btn-outline-primary"
+            type="button"
+          >
+            <i class="fas fa-angle-double-left"></i>
+          </button>
+        </popper>
       </div>
+      <!-- / Darken color - button -->
+
+      <!-- Hex color - Input -->
       <input
         @keyup="emitColors"
         v-model="colors.hex"
@@ -14,20 +31,39 @@
         class="form-control"
         style="text-align: center;"
       />
+      <!-- / Hex color - Input -->
+
+      <!-- Brighten color - button -->
       <div class="input-group-append">
-        <button
-          @click="$emit('brighten-color')"
-          class="btn btn-outline-primary"
-          type="button"
+        <popper
+          trigger="hover"
+          :options="{
+            placement: 'top',
+            modifiers: { offset: { offset: '0,10px' } },
+          }"
         >
-          <i class="fas fa-angle-double-right"></i>
-        </button>
+          <div class="popper">
+            Brighten up selected color
+          </div>
+          <button
+            slot="reference"
+            @click="$emit('brighten-color')"
+            class="btn btn-outline-primary"
+            type="button"
+          >
+            <i class="fas fa-angle-double-right"></i>
+          </button>
+        </popper>
       </div>
+      <!-- / Brighten color - button -->
     </div>
   </div>
 </template>
 
 <script>
+import Popper from "vue-popperjs";
+import "vue-popperjs/dist/vue-popper.css";
+
 import { hexToRgb } from "@/utils/colorFuns.js";
 
 export default {
@@ -35,6 +71,10 @@ export default {
 
   props: {
     colors: Object,
+  },
+
+  components: {
+    popper: Popper,
   },
 
   methods: {
