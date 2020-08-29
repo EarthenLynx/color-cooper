@@ -85,7 +85,7 @@
             @click="aboutActive = !aboutActive"
             id="about"
             class="mt-3 text-center"
-            ><small>🎨 About this app</small></div
+            ><small>About this app</small></div
           >
         </div>
         <div class="col"></div>
