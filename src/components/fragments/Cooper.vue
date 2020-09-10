@@ -32,9 +32,7 @@
 
 									<div>
 										<!-- Toggle between the two options -->
-										<div
-											class="custom-control custom-switch mt-3 float-right"
-										>
+										<div class="custom-control custom-switch mt-3 float-right">
 											<input
 												type="checkbox"
 												class="custom-control-input"
@@ -51,41 +49,45 @@
 											>Step 1: Choose an image {{ localfileText }}</label
 										>
 
-										<!-- From local mashine -->
-										<div v-if="localfile" class="input-group mb-3">
-											<div class="custom-file">
-												<input
-													class="custom-file-input"
-													id="file-processing"
-													type="file"
-													@change="changePreviewFile()"
-												/>
-												<label class="custom-file-label" for="inputGroupFile01"
-													>Select a picture</label
-												>
+										<transition name="input-fade" >
+											<!-- From local mashine -->
+											<div v-if="localfile" key="local" class="input-group mb-3">
+												<div class="custom-file">
+													<input
+														class="custom-file-input"
+														id="file-processing"
+														type="file"
+														@change="changePreviewFile()"
+													/>
+													<label
+														class="custom-file-label"
+														for="inputGroupFile01"
+														>Select a picture</label
+													>
+												</div>
 											</div>
-										</div>
-										<!-- / From local mashine -->
+											<!-- / From local mashine -->
 
-										<!-- From the Internet -->
-										<div v-else class="input-group mb-3">
-											<input
-												type="text"
-												class="form-control"
-												id="url-processing"
-												v-model="imgUrl"
-											/>
-											<div class="input-group-append">
-												<button
-													@click="changePreviewUrl()"
-													class="btn btn-outline-primary"
-												>
-													Update preview
-												</button>
+											<!-- From the Internet -->
+											<div v-else key="url" class="input-group mb-3">
+												<input
+													type="text"
+													class="form-control"
+													id="url-processing"
+													v-model="imgUrl"
+												/>
+												<div class="input-group-append">
+													<button
+														@click="changePreviewUrl()"
+														class="btn btn-outline-primary"
+													>
+														Update preview
+													</button>
+												</div>
 											</div>
-										</div>
+											<!-- / From the Internet -->
+										</transition>
 									</div>
-									<!-- / From the Internet -->
 								</div>
 								<div class="col"></div>
 							</div>
@@ -346,4 +348,23 @@ button.btn {
 .preview-slide-move {
 	transition: all 1.5s;
 }
+
+/* Animation style for the inputs */
+.input-fade-enter {
+  transform: translateY(-50px);  
+  opacity: 0;
+}
+
+
+.input-fade-enter-active {
+  transition: all 0.75s;
+}
+
+.input-fade-leave-active {
+  position: absolute;
+	transform: translateX(50px);
+	transition: all 0.55s;
+	opacity: 0;
+}
+
 </style>
