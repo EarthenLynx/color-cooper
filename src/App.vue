@@ -22,6 +22,7 @@
     <transition name="modal-show">
       <Cooper
         @add-color="handleAddColorToCollection($event)"
+        @add-message="handleAddMessage($event)"
         @toggle-cooper="cooperActive = false"
         v-if="cooperActive"
       />
@@ -203,6 +204,7 @@ export default {
 
     // Add a notificaiton to the list
     handleAddMessage(message) {
+      // Message should always have attributed type and value. Type indicates the color of the alert
       this.messages.push({ id: this.messages.length, ...message });
       setTimeout(() => {
         this.messages.shift();
