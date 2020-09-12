@@ -158,6 +158,7 @@ button.toolbar-button {
 @media (max-width: 576px) {
   #sidebar {
     width: 100vw;
+    height: inherit;
   }
 
   .mobile {

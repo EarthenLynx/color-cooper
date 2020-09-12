@@ -115,7 +115,10 @@
 
 												<small style="color: red"
 													>Please note: This request uses the
-													<a href="https://cors-anywhere.herokuapp.com" target="_blank">
+													<a
+														href="https://cors-anywhere.herokuapp.com"
+														target="_blank"
+													>
 														cors-anywhere</a
 													>
 													proxy from herokuapps</small
@@ -294,24 +297,21 @@ export default {
 			fetch('https://cors-anywhere.herokuapp.com/' + this.imgUrl)
 				.then((response) => response.blob())
 				.then((blob) => {
-					console.log(blob)
+					console.log(blob);
 					if (blob.type.indexOf('image') === -1) {
 						this.$emit('add-message', {
 							type: 'warning',
-							value: 'The URL you have specified does not direct to an image',
+							value: 'The URL you have specified does not point to an image',
 						});
-						return this.downloading = false;
+						return (this.downloading = false);
 					}
-					console.log(blob);
-					const url = window.URL.createObjectURL(blob);
-					preview.src = url;
+					preview.src = window.URL.createObjectURL(blob);
 					this.downloading = false;
 				})
 				.catch((e) => {
 					this.$emit('add-message', {
 						type: 'danger',
-						value:
-							'The image could not be fetched.' + e,
+						value: 'The image could not be fetched.' + e,
 					});
 					this.downloading = false;
 				});
@@ -429,6 +429,5 @@ button.btn {
 	transform: translateX(25px);
 	opacity: 0;
 	transition: transform 1s, opacity 1s;
-	/* transition: opacity 1s; */
 }
 </style>
