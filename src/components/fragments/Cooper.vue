@@ -21,7 +21,7 @@
 						<!-- Img processing -->
 						<div class="container">
 							<div class="row">
-								<div class="col"></div>
+								<div class="col" />
 								<div class="col-lg-8 col-md-12">
 									<img
 										class="img-fluid"
@@ -49,9 +49,13 @@
 											>Step 1: Choose an image {{ localfileText }}</label
 										>
 
-										<transition name="input-fade" >
+										<transition name="input-fade">
 											<!-- From local mashine -->
-											<div v-if="localfile" key="local" class="input-group mb-3">
+											<div
+												v-if="localfile"
+												key="local"
+												class="input-group mb-3"
+											>
 												<div class="custom-file">
 													<input
 														class="custom-file-input"
@@ -76,20 +80,52 @@
 													id="url-processing"
 													v-model="imgUrl"
 												/>
+
+												<!-- Button to download image -->
 												<div class="input-group-append">
+													<!-- Download active -->
 													<button
+														disabled
+														v-if="downloading"
+														class="btn btn-primary btn-download"
+													>
+														<div
+															class="spinner-border text-light"
+															role="status"
+															style="height: 25px; width: 25px;"
+														>
+															<span class="sr-only">Loading...</span>
+														</div>
+													</button>
+													<!-- / Download active -->
+
+													<!-- Download idle -->
+													<button
+														v-else
+														id="url-button"
 														@click="changePreviewUrl()"
-														class="btn btn-outline-primary"
+														class="btn btn-primary btn-download"
 													>
 														Update preview
 													</button>
+													<!-- / Download idle -->
 												</div>
+
+												<!-- / Button to download image -->
+
+												<small style="color: red"
+													>Please note: This request uses the
+													<a href="https://cors-anywhere.herokuapp.com" target="_blank">
+														cors-anywhere</a
+													>
+													proxy from herokuapps</small
+												>
 											</div>
 											<!-- / From the Internet -->
 										</transition>
 									</div>
 								</div>
-								<div class="col"></div>
+								<div class="col" />
 							</div>
 						</div>
 						<!-- / Img processing -->
@@ -97,7 +133,7 @@
 						<!-- Number of colors extracted -->
 						<div class="container">
 							<div class="row">
-								<div class="col"></div>
+								<div class="col" />
 								<div class="col-lg-8 col-sm-12">
 									<label for="how-many-colors"
 										>Step 2: # of colors extracted</label
@@ -121,7 +157,7 @@
 										/>
 									</div>
 								</div>
-								<div class="col"></div>
+								<div class="col" />
 							</div>
 						</div>
 						<!-- / Numbers of colors extracted -->
@@ -129,7 +165,7 @@
 						<!-- Action buttons -->
 						<div class="container">
 							<div class="row">
-								<div class="col"></div>
+								<div class="col" />
 								<div class="col-lg-4 col-sm-12">
 									<div class="input-group mt-2 mb-2">
 										<label for="button-push-to-collection">Step 3:</label>
@@ -138,7 +174,7 @@
 											type="button"
 											class="btn btn-primary"
 										>
-											<i class="fas fa-palette"></i> Get dominant colors
+											<i class="fas fa-palette" /> Get dominant colors
 										</button>
 									</div>
 								</div>
@@ -151,11 +187,11 @@
 											type="button"
 											class="btn btn-primary"
 										>
-											<i class="fas fa-paper-plane"></i> Push to collection
+											<i class="fas fa-paper-plane" /> Push to collection
 										</button>
 									</div>
 								</div>
-								<div class="col"></div>
+								<div class="col" />
 							</div>
 						</div>
 						<!-- / Action buttons -->
@@ -174,7 +210,7 @@
 								<div
 									:style="{ 'background-color': color }"
 									class="cooper-preview"
-								></div>
+								/>
 							</div>
 						</transition-group>
 						<!-- / Color preview  -->
@@ -201,6 +237,7 @@ export default {
 			// Data for the file preview
 			localfile: true,
 			imgUrl: '',
+			downloading: false,
 
 			// props for colorthief
 			index: 1,
@@ -250,8 +287,34 @@ export default {
 
 		// When a new URL is confirmed by the user, update the preview
 		changePreviewUrl() {
+			this.downloading = true;
 			let preview = document.querySelector('img');
-			preview.src = this.imgUrl;
+
+			// Note that this axios request uses a cors anywhere proxy
+			fetch('https://cors-anywhere.herokuapp.com/' + this.imgUrl)
+				.then((response) => response.blob())
+				.then((blob) => {
+					console.log(blob)
+					if (blob.type.indexOf('image') === -1) {
+						this.$emit('add-message', {
+							type: 'warning',
+							value: 'The URL you have specified does not direct to an image',
+						});
+						return this.downloading = false;
+					}
+					console.log(blob);
+					const url = window.URL.createObjectURL(blob);
+					preview.src = url;
+					this.downloading = false;
+				})
+				.catch((e) => {
+					this.$emit('add-message', {
+						type: 'danger',
+						value:
+							'The image could not be fetched.' + e,
+					});
+					this.downloading = false;
+				});
 		},
 
 		// Use colorthief to extract the number of extracted colors from the img
@@ -264,7 +327,6 @@ export default {
 					img,
 					this.numExtractedColors
 				);
-				console.log(extractedColors);
 				this.extractedRgb = extractedColors;
 			} catch (e) {
 				this.$emit('add-message', {
@@ -328,6 +390,11 @@ button.btn {
 	font-weight: 400;
 }
 
+.btn-download {
+	height: 38px;
+	min-width: 140px;
+}
+
 /* Animation styles for the preview colors */
 .preview-slide-enter {
 	transform: translateY(-20px);
@@ -351,20 +418,18 @@ button.btn {
 
 /* Animation style for the inputs */
 .input-fade-enter {
-  transform: translateY(-50px);  
-  opacity: 0;
+	transform: translateX(-50px);
+	opacity: 0;
 }
 
-
 .input-fade-enter-active {
-  transition: all 0.75s;
+	transition: all 0.75s;
 }
 
 .input-fade-leave-active {
-  position: absolute;
+	position: absolute;
 	transform: translateX(50px);
 	transition: all 0.55s;
 	opacity: 0;
 }
-
 </style>
