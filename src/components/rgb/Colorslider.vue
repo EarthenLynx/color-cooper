@@ -2,7 +2,7 @@
 	<div class="form-group card">
 		<div
 			class="color-indicator"
-			:style="{ 'background-color': backgroundColor }"
+			:style="{ 'background-color': backgroundColor}"
 		></div>
 
 		<input
@@ -62,6 +62,7 @@ input.form-control {
 	width: 3.5rem;
 	margin-right: 1rem;
 	border-radius: 0.5rem 0 0 0.5rem;
+	border-right: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 .form-control {
