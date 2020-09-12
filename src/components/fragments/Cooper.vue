@@ -87,7 +87,7 @@
 													<button
 														disabled
 														v-if="downloading"
-														class="btn btn-primary btn-download"
+														class="btn btn-primary "
 													>
 														<div
 															class="spinner-border text-light"
@@ -104,7 +104,7 @@
 														v-else
 														id="url-button"
 														@click="changePreviewUrl()"
-														class="btn btn-primary btn-download"
+														class="btn btn-primary "
 													>
 														Update preview
 													</button>
@@ -356,6 +356,8 @@ export default {
 <style scoped>
 button.btn {
 	width: 100%;
+	max-height: 38px;
+	min-width: 140px;
 }
 
 .modal-wrapper {
@@ -388,11 +390,6 @@ button.btn {
 
 .custom-control-label {
 	font-weight: 400;
-}
-
-.btn-download {
-	height: 38px;
-	min-width: 140px;
 }
 
 /* Animation styles for the preview colors */
