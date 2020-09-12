@@ -422,7 +422,7 @@ button.btn {
 
 /* Animation style for the inputs */
 .input-fade-enter {
-	transform: translateX(-25px);
+	transform: translateX(-250px);
 	opacity: 0;
 }
 
@@ -433,7 +433,7 @@ button.btn {
 .input-fade-leave-active {
 	width: 94%;
 	position: absolute;
-	transform: translateX(25px);
+	transform: translateY(75px);
 	opacity: 0;
 	transition: transform 1s, opacity 1s;
 }
