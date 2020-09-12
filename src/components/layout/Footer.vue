@@ -35,7 +35,7 @@ export default {
 
 <style scoped>
 .card-footer.color-preview {
-  height: 8rem;
+  height: 4rem;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
 }

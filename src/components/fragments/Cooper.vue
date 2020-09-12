@@ -30,7 +30,7 @@
 										crossorigin="Anonymous"
 									/>
 
-									<div>
+									<div style="height: 120px;">
 										<!-- Toggle between the two options -->
 										<div class="custom-control custom-switch mt-3 float-right">
 											<input
@@ -104,7 +104,7 @@
 														v-else
 														id="url-button"
 														@click="changePreviewUrl()"
-														class="btn btn-primary "
+														class="btn btn-outline-primary "
 													>
 														Update preview
 													</button>
@@ -415,18 +415,20 @@ button.btn {
 
 /* Animation style for the inputs */
 .input-fade-enter {
-	transform: translateX(-50px);
+	transform: translateX(-25px);
 	opacity: 0;
 }
 
 .input-fade-enter-active {
-	transition: all 0.75s;
+	transition: all 1s;
 }
 
 .input-fade-leave-active {
+	width: 94%;
 	position: absolute;
-	transform: translateX(50px);
-	transition: all 0.55s;
+	transform: translateX(25px);
 	opacity: 0;
+	transition: transform 1s, opacity 1s;
+	/* transition: opacity 1s; */
 }
 </style>
