@@ -98,9 +98,6 @@
 
 <script>
 // Import the necessary components
-import Sidebar from "@/components/layout/Sidebar";
-import Messagebar from "@/components/layout/Messagebar";
-import Cooper from "@/components/fragments/Cooper";
 import Toolbar from "@/components/layout/Toolbar";
 import ColorRgbBar from "@/components/rgb/ColorRgbBar";
 import ColorHexBar from "@/components/hex/ColorHexBar";
@@ -119,9 +116,10 @@ export default {
   name: "App",
 
   components: {
-    Sidebar,
-    Messagebar,
-    Cooper,
+    // Lazyload the components that are not initially shown
+    Sidebar: () => import("@/components/layout/Sidebar"),
+    Messagebar: () => "@/components/layout/Messagebar",
+    Cooper: () => import("@/components/fragments/Cooper"),
     ColorRgbBar,
     Toolbar,
     Footer,
