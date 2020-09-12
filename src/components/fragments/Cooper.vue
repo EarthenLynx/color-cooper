@@ -354,6 +354,12 @@ export default {
 </script>
 
 <style scoped>
+img {
+	max-height: 300px;
+	display: block; 
+	margin: auto;
+}
+
 button.btn {
 	width: 100%;
 	max-height: 38px;
@@ -370,6 +376,7 @@ button.btn {
 }
 
 .modal {
+	z-index: 4;
 	display: block;
 	position: absolute;
 	overflow-y: auto;
